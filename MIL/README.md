@@ -11,5 +11,3 @@
 
 ## 当前重点
 
-- C01 Introduction
-- C02 Basics
