@@ -2,12 +2,12 @@
 
 Based on Mathematics in Lean by leanprover-community.
 
-这是我学习 Lean 4 和 *Mathematics in Lean* 的公开学习仓库。目标是从 Chapter 1 重新开始，用小步提交记录自己的学习轨迹，并为 "AI4Math: Lean4 与数学形式化" 暑期学校申请准备可展示的 GitHub 记录。
+这是我学习 Lean 4 公开学习仓库。用小步提交记录自己的学习轨迹。
 
 ## Repository Layout
 
 - `MathProofs/`: 独立练习、试验和 proof scratchpad
-- `MIL/`: 按章节整理的个人学习记录，只放我真正做过、改过、能解释的内容
+- `MIL/`: 学习 *Mathematics in Lean* 的记录，按章节整理的个人学习记录，只放我真正做过、改过、能解释的内容
 - `notes/`: 可选的章节笔记、反思和踩坑记录
 - `mathematics_in_lean/`: 本地参考教材仓库，保留在电脑上，但不纳入这个公开仓库
 
