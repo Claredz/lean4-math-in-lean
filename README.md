@@ -9,24 +9,19 @@ Based on Mathematics in Lean by leanprover-community.
 
 ## Quick Map
 
-### 我真正会写的地方
+### 提交区
 
 - `MathProofs/`: 自由练习区，放独立的小证明、试验和草稿
 - `MIL_progress/`: 按 MIL 章节整理的公开学习记录，只放我真正做过、改过、能解释的内容
 - `notes/`: 文字笔记、反思、证明思路和踩坑记录
 
-### 我主要拿来参考的地方
+### 参考区
 
 - `mathematics_in_lean/`: 本地参考教材仓库，保留在电脑上，但不作为这个公开仓库的成果主体
 
 
 
-## Working Rules
 
-- 公开仓库不镜像整套教材。
-- 只提交我自己完成、整理或能够解释的内容。
-- 学习时可以参考本地 `mathematics_in_lean/`，公开时只整理结果到 `MIL_progress/`、`MathProofs/` 或 `notes/`。
-- 尽量保持小步提交，让 GitHub 能清楚展示学习过程。
 
 ## Daily Workflow
 
@@ -39,7 +34,7 @@ Based on Mathematics in Lean by leanprover-community.
 
 ### MIL Progress
 
-- [ ] C01 Introduction
+- [x] C01 Introduction
 - [ ] C02 Basics
 - [ ] C03 Logic
 - [ ] C04 Sets and Functions
