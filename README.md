@@ -19,23 +19,7 @@ Based on Mathematics in Lean by leanprover-community.
 
 - `mathematics_in_lean/`: 本地参考教材仓库，保留在电脑上，但不作为这个公开仓库的成果主体
 
-### 我通常不用手动整理的地方
 
-- `.lake/`: Lean / Lake 依赖和构建缓存，里面包括 `mathlib` 等依赖
-- `.github/`: GitHub Actions 工作流配置
-- `.vscode/`: VS Code 本地配置
-- `.git/`: Git 历史和元数据
-
-## Root Files
-
-这些顶层小文件不是杂物，基本都应该留在根目录：
-
-- `README.md`: 仓库总导航
-- `MathProofs.lean`: Lean 项目入口文件
-- `lakefile.toml`: Lake 项目配置
-- `lake-manifest.json`: 依赖锁定文件
-- `lean-toolchain`: Lean 版本配置
-- `.gitignore`: Git 忽略规则
 
 ## Working Rules
 
