@@ -2,25 +2,59 @@
 
 Based on Mathematics in Lean by leanprover-community.
 
-这是我学习 Lean 4 公开学习仓库。用小步提交记录自己的学习轨迹。
+这是我的 Lean 4 / MIL 公开学习仓库。它同时承担两件事：
 
-## Repository Layout
+1. 展示我自己的学习成果和进度
+2. 在本地提供一个方便对照教材的工作环境
 
-- `MathProofs/`: 独立练习、试验和 proof scratchpad
-- `MIL/`: 学习 *Mathematics in Lean* 的记录，按章节整理的个人学习记录，只放我真正做过、改过、能解释的内容
-- `notes/`: 笔记、反思和踩坑记录
-- `mathematics_in_lean/`: 本地参考教材仓库，保留在电脑上，但不纳入这个公开仓库
+## Quick Map
 
-## Study Rules
+### 我真正会写的地方
+
+- `MathProofs/`: 自由练习区，放独立的小证明、试验和草稿
+- `MIL_progress/`: 按 MIL 章节整理的公开学习记录，只放我真正做过、改过、能解释的内容
+- `notes/`: 文字笔记、反思、证明思路和踩坑记录
+
+### 我主要拿来参考的地方
+
+- `mathematics_in_lean/`: 本地参考教材仓库，保留在电脑上，但不作为这个公开仓库的成果主体
+
+### 我通常不用手动整理的地方
+
+- `.lake/`: Lean / Lake 依赖和构建缓存，里面包括 `mathlib` 等依赖
+- `.github/`: GitHub Actions 工作流配置
+- `.vscode/`: VS Code 本地配置
+- `.git/`: Git 历史和元数据
+
+## Root Files
+
+这些顶层小文件不是杂物，基本都应该留在根目录：
+
+- `README.md`: 仓库总导航
+- `MathProofs.lean`: Lean 项目入口文件
+- `lakefile.toml`: Lake 项目配置
+- `lake-manifest.json`: 依赖锁定文件
+- `lean-toolchain`: Lean 版本配置
+- `.gitignore`: Git 忽略规则
+
+## Working Rules
 
 - 公开仓库不镜像整套教材。
 - 只提交我自己完成、整理或能够解释的内容。
-- 学习时可以参考本地 `mathematics_in_lean/`，公开时只整理结果到这个仓库。
+- 学习时可以参考本地 `mathematics_in_lean/`，公开时只整理结果到 `MIL_progress/`、`MathProofs/` 或 `notes/`。
 - 尽量保持小步提交，让 GitHub 能清楚展示学习过程。
+
+## Daily Workflow
+
+1. 在本地 `mathematics_in_lean/` 里对照教材学习。
+2. 完成后，把成果整理到 `MIL_progress/` 或 `MathProofs/`。
+3. 如果有文字总结、疑问或反思，就写到 `notes/`。
+4. 在 VS Code 的源代码管理面板里暂存、提交、推送。
 
 ## Current Progress
 
-### MIL
+### MIL Progress
+
 - [ ] C01 Introduction
 - [ ] C02 Basics
 - [ ] C03 Logic
@@ -34,13 +68,6 @@ Based on Mathematics in Lean by leanprover-community.
 - [ ] C11 Topology
 - [ ] C12 Differential Calculus
 - [ ] C13 Integration and Measure Theory
-
-## Workflow
-
-1. 在本地 `mathematics_in_lean/` 里对照教材学习。
-2. 把完成后的结果整理到 `MIL/` 或 `MathProofs/`。
-3. 在 VS Code 的源代码管理面板里暂存、提交、推送。
-4. 持续更新本 README 和章节进度。
 
 ## Upstream Reference
 
