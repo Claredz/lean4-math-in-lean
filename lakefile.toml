@@ -16,3 +16,6 @@ rev = "v4.27.0"
 
 [[lean_lib]]
 name = "MathProofs"
+
+[[lean_lib]]
+name = "MIL_progress"
