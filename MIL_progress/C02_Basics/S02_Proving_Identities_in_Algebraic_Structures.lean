@@ -16,7 +16,7 @@ variable (R : Type*) [Ring R]
 #check (add_mul : ∀ a b c : R, (a + b) * c = a * c + b * c)
 
 end
-
+---抽象代数吗？还没学
 section
 variable (R : Type*) [CommRing R]
 variable (a b c d : R)

@@ -8,7 +8,7 @@ def f (x : ℝ) :=
   x + 3
 
 #check f
-
+---命题即类型，这确实是lean4的核心，from 之后再来看的claredz
 -- These are propositions, of type `Prop`.
 #check 2 + 2 = 4
 
