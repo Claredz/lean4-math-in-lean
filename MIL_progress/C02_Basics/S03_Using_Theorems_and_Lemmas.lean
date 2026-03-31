@@ -56,7 +56,7 @@ example (h₀ : a ≤ b) (h₁ : b < c) (h₂ : c ≤ d) (h₃ : d < e) : a < e 
   apply lt_trans h₄ h₅
 
 
----have对于把目标拆开很好用
+---have对于把目标拆开很好用，calc,将中间过程呈现了出来
 
 
 
@@ -67,7 +67,7 @@ section
 
 example (h : 2 * a ≤ 3 * b) (h' : 1 ≤ a) (h'' : d = 2) : d + a ≤ 5 * b := by
   linarith
----好评
+---好评和ring一样好用
 end
 
 example (h : 1 ≤ a) (h' : b ≤ c) : 2 + a + exp b ≤ 3 * a + exp c := by
@@ -78,12 +78,12 @@ example (h : 1 ≤ a) (h' : b ≤ c) : 2 + a + exp b ≤ 3 * a + exp c := by
 #check (log_le_log : 0 < a → a ≤ b → log a ≤ log b)
 #check (log_lt_log : 0 < a → a < b → log a < log b)
 #check (add_le_add : a ≤ b → c ≤ d → a + c ≤ b + d)
-#check (add_le_add_left : a ≤ b → ∀ c, a + c ≤ b + c)
-#check (add_le_add_right : a ≤ b → ∀ c, c + a ≤ c + b)
+#check (add_le_add_left : a ≤ b → ∀ c, c + a ≤ c + b)
+#check (add_le_add_right : a ≤ b → ∀ c, a + c ≤ b + c)
 #check (add_lt_add_of_le_of_lt : a ≤ b → c < d → a + c < b + d)
 #check (add_lt_add_of_lt_of_le : a < b → c ≤ d → a + c < b + d)
-#check (add_lt_add_left : a < b → ∀ c, a + c < b + c)
-#check (add_lt_add_right : a < b → ∀ c, c + a < c + b)
+#check (add_lt_add_left : a < b → ∀ c, c + a < c + b)
+#check (add_lt_add_right : a < b → ∀ c, a + c < b + c)
 #check (add_nonneg : 0 ≤ a → 0 ≤ b → 0 ≤ a + b)
 #check (add_pos : 0 < a → 0 < b → 0 < a + b)
 #check (add_pos_of_pos_of_nonneg : 0 < a → 0 ≤ b → 0 < a + b)
@@ -102,7 +102,7 @@ example (h₀ : a ≤ b) (h₁ : c < d) : a + exp c + e < b + exp d + e := by
 
 example (h₀ : d ≤ e) : c + exp (a + d) ≤ c + exp (a + e) := by
   have h₁ : a + d ≤ a + e := by
-    apply add_le_add_right h₀
+    apply add_le_add_left h₀
   linarith [exp_le_exp.2 h₁]
 
 
@@ -113,7 +113,7 @@ example (h : a ≤ b) : log (1 + exp a) ≤ log (1 + exp b) := by
     linarith [exp_pos a]
   apply log_le_log h₀
   have h₁ : 1 + exp a ≤ 1 + exp b := by
-    apply add_le_add_right
+    apply add_le_add_left
     apply exp_le_exp.mpr h
   exact h₁
 
@@ -129,8 +129,7 @@ example : 0 ≤ a ^ 2 := by
 example (h : a ≤ b) : c - exp b ≤ c - exp a := by
   have h₀ : exp a ≤ exp b := by
     apply exp_le_exp.mpr h
-  apply add_le_add_right
-  apply neg_le_neg
+  apply sub_le_sub_left
   exact h₀
 ---这里的原文省略了:=by 虽然没有错误但是又warning
 example : 2*a*b ≤ a^2 + b^2 := by
@@ -143,7 +142,7 @@ example : 2*a*b ≤ a^2 + b^2 := by
     _ ≤ 2*a*b + (a^2 - 2*a*b + b^2) := add_le_add (le_refl _) h
     _ = a^2 + b^2 := by ring
 
-example  : 2*a*b ≤ a^2 + b^2 := by
+example : 2*a*b ≤ a^2 + b^2 := by
   have h : 0 ≤ a^2 - 2*a*b + b^2 := by
     calc
       a^2 - 2*a*b + b^2 = (a - b)^2 := by ring
@@ -167,7 +166,6 @@ example : |a*b| ≤ (a^2 + b^2)/2 := by
   constructor
   · exact h₁
   · exact h₂
-
 
 
 
