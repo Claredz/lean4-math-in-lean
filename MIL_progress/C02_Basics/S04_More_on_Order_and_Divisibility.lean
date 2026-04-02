@@ -52,16 +52,34 @@ example : min (min a b) c = min a (min b c) := by
 
 
 
+
+
 theorem aux : min a b + c ≤ min (a + c) (b + c) := by
-  sorry
+  apply le_min
+  · apply add_le_add_right
+    apply min_le_left
+  · apply add_le_add_right
+    apply min_le_right
+
+---将参数带入定理的方法很好，好用，利用这个构建一个新的命题
 example : min a b + c = min (a + c) (b + c) := by
-  sorry
+  apply le_antisymm
+  · apply aux
+  have h₁ := aux (a := a + c) (b := b + c) (c := -c)
+  have h₂ : a + c + -c = a := by ring
+  have h₃ : b + c + -c = b := by ring
+  rw [h₂,h₃] at h₁
+  linarith
+
 #check (abs_add : ∀ a b : ℝ, |a + b| ≤ |a| + |b|)
 
-example : |a| - |b| ≤ |a - b| :=
-  sorry
+example : |a| - |b| ≤ |a - b| := by
+ have h := abs_add_le (a - b) b
+ have h₁ : a - b + b = a := by ring
+ rw [h₁] at h
+ linarith
 end
-
+---有by与没有by,我在这里卡了很久，原题目是没有By的，这两种情况的区别在哪里？
 section
 variable (w x y z : ℕ)
 
@@ -76,8 +94,27 @@ example : x ∣ x ^ 2 := by
   apply dvd_mul_left
 
 example (h : x ∣ w) : x ∣ y * (x * z) + x ^ 2 + w ^ 2 := by
-  sorry
+  have h₁ : x ∣ w^2 := by
+    apply dvd_pow
+    exact h
+    exact Ne.symm (Nat.zero_ne_add_one 1)
+  have h₂ : x ∣ x ^ 2 := by
+     apply dvd_mul_left
+  have h₃ : x ∣ y * (x * z) := by
+    apply dvd_mul_of_dvd_right
+    apply dvd_mul_right
+  have h₄ :   x ∣ y * (x * z) + x ^ 2:= by
+    apply dvd_add h₃ h₂
+  apply dvd_add h₄ h₁
+
+
 end
+
+#check(dvd_add)
+#check(dvd_pow)
+
+
+
 
 section
 variable (m n : ℕ)
