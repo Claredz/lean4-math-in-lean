@@ -29,8 +29,8 @@ example : min a b = min b a := by
     apply min_le_left
   apply le_antisymm
   --- apply是可以自动匹配参数的是吧？
-  apply h
-  apply h
+  · apply h
+  · apply h
 
 example : min a b = min b a := by
   apply le_antisymm
@@ -125,5 +125,9 @@ variable (m n : ℕ)
 #check (Nat.lcm_zero_left n : Nat.lcm 0 n = 0)
 
 example : Nat.gcd m n = Nat.gcd n m := by
-  sorry
+  apply Nat.dvd_antisymm
+  repeat
+    apply Nat.dvd_gcd
+    apply Nat.gcd_dvd_right
+    apply Nat.gcd_dvd_left
 end
