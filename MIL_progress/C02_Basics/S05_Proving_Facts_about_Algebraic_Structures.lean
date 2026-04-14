@@ -66,6 +66,7 @@ theorem absorb1 : x ⊓ (x ⊔ y) = x := by
   · apply le_refl
   apply le_sup_left
 ---貌似这个· 好像不只是排版的问题，我想我有必要仔细看看have calc · 了
+--- · 是用来聚焦子目标的，在· 后面只有一个子目标，请注意缩进以防语句在错误的子目标里面
 theorem absorb2 : x ⊔ x ⊓ y = x := by
   apply le_antisymm
   · apply sup_le
