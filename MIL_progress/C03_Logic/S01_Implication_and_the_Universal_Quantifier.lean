@@ -111,25 +111,29 @@ theorem fnUb_add {f g : α → R} {a b : R} (hfa : FnUb' f a) (hgb : FnUb' g b) 
 end
 
 example (f : ℝ → ℝ) (h : Monotone f) : ∀ {a b}, a ≤ b → f a ≤ f b :=
-  @h
-
+  @h  ---by apply h也是可以的
+---@将隐式参数显式化，可以手动控制了
 section
 variable (f g : ℝ → ℝ)
 
 example (mf : Monotone f) (mg : Monotone g) : Monotone fun x ↦ f x + g x := by
   intro a b aleb
   apply add_le_add
-  apply mf aleb
-  apply mg aleb
+  · apply mf aleb
+  · apply mg aleb
 
 example (mf : Monotone f) (mg : Monotone g) : Monotone fun x ↦ f x + g x :=
   fun a b aleb ↦ add_le_add (mf aleb) (mg aleb)
 
 example {c : ℝ} (mf : Monotone f) (nnc : 0 ≤ c) : Monotone fun x ↦ c * f x :=
-  sorry
+  fun a b aleb ↦ mul_le_mul_of_nonneg_left (mf aleb) (nnc)
 
-example (mf : Monotone f) (mg : Monotone g) : Monotone fun x ↦ f (g x) :=
-  sorry
+example (mf : Monotone f) (mg : Monotone g) : Monotone fun x ↦ f (g x) := by
+  intro a b aleb
+  dsimp
+  apply mf
+  apply mg
+  apply aleb
 
 def FnEven (f : ℝ → ℝ) : Prop :=
   ∀ x, f x = f (-x)
@@ -139,19 +143,29 @@ def FnOdd (f : ℝ → ℝ) : Prop :=
 
 example (ef : FnEven f) (eg : FnEven g) : FnEven fun x ↦ f x + g x := by
   intro x
+  dsimp
   calc
     (fun x ↦ f x + g x) x = f x + g x := rfl
     _ = f (-x) + g (-x) := by rw [ef, eg]
 
 
 example (of : FnOdd f) (og : FnOdd g) : FnEven fun x ↦ f x * g x := by
-  sorry
+  intro x
+  dsimp
+  rw[of,og]
+  ring
 
 example (ef : FnEven f) (og : FnOdd g) : FnOdd fun x ↦ f x * g x := by
-  sorry
+  intro x
+  dsimp
+  rw[ef,og]
+  ring
 
 example (ef : FnEven f) (og : FnOdd g) : FnEven fun x ↦ f (g x) := by
-  sorry
+  intro x
+  dsimp
+  rw[ef,og]
+  ring
 
 end
 
@@ -166,7 +180,13 @@ example : s ⊆ s := by
 theorem Subset.refl : s ⊆ s := fun x xs ↦ xs
 
 theorem Subset.trans : r ⊆ s → s ⊆ t → r ⊆ t := by
-  sorry
+  intro rs st x xr
+  apply st
+  apply rs
+  exact xr
+
+
+
 
 end
 
@@ -177,8 +197,16 @@ variable (s : Set α) (a b : α)
 def SetUb (s : Set α) (a : α) :=
   ∀ x, x ∈ s → x ≤ a
 
-example (h : SetUb s a) (h' : a ≤ b) : SetUb s b :=
-  sorry
+example (h : SetUb s a) (h' : a ≤ b) : SetUb s b := by
+  intro x xsubs
+  apply le_trans (h x xsubs) (h')
+---有参数的apply
+
+example (h : SetUb s a) (h' : a ≤ b) : SetUb s b := by
+  intro x xsubs
+  apply le_trans
+  · apply h x xsubs
+  · apply h'
 
 end
 
@@ -188,15 +216,23 @@ open Function
 
 example (c : ℝ) : Injective fun x ↦ x + c := by
   intro x₁ x₂ h'
+  dsimp at h'
   exact (add_left_inj c).mp h'
 
 example {c : ℝ} (h : c ≠ 0) : Injective fun x ↦ c * x := by
-  sorry
+   intro x₁ x₂ h'
+   dsimp at h'
+   apply mul_left_cancel at h'
+   exact h'
 
 variable {α : Type*} {β : Type*} {γ : Type*}
 variable {g : β → γ} {f : α → β}
 
 example (injg : Injective g) (injf : Injective f) : Injective fun x ↦ g (f x) := by
-  sorry
+  intro x₁ x₂ h'
+  dsimp at h'
+  apply injg at h'
+  apply injf at h'
+  exact h'
 
 end
