@@ -222,8 +222,10 @@ example (c : ℝ) : Injective fun x ↦ x + c := by
 example {c : ℝ} (h : c ≠ 0) : Injective fun x ↦ c * x := by
    intro x₁ x₂ h'
    dsimp at h'
-   apply mul_left_cancel at h'
-   exact h'
+   apply mul_left_cancel₀ at h'
+   · apply h'
+   · apply h
+
 
 variable {α : Type*} {β : Type*} {γ : Type*}
 variable {g : β → γ} {f : α → β}
