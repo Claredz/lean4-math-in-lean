@@ -110,8 +110,9 @@ theorem fnUb_add {f g : α → R} {a b : R} (hfa : FnUb' f a) (hgb : FnUb' g b) 
 
 end
 
-example (f : ℝ → ℝ) (h : Monotone f) : ∀ {a b}, a ≤ b → f a ≤ f b :=
-  @h  ---by apply h也是可以的
+example (f : ℝ → ℝ) (h : Monotone f) : ∀ {a b}, a ≤ b → f a ≤ f b := by
+  apply h
+ --@h  ---by apply h也是可以的
 ---@将隐式参数显式化，可以手动控制了
 section
 variable (f g : ℝ → ℝ)
